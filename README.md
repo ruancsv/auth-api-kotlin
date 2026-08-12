@@ -34,6 +34,8 @@ O projeto foi criado com foco em estudo e prática de autenticação segura em a
 - Autenticação stateless
 - Validação de dados de entrada com Jakarta Validation
 - Testes da camada web com MockMvc
+- Padronização das respostas de erro
+- Tratamento de recurso não encontrado (404)
 
 ---
 
@@ -51,6 +53,7 @@ src/main/kotlin/com/ruan/authapi
 │   └── UserController.kt
 │
 ├── dto
+│   ├── ErrorResponse.kt
 │   ├── LoginRequest.kt
 │   ├── LoginResponse.kt
 │   ├── RegisterRequest.kt
@@ -334,6 +337,8 @@ Funcionalidades atualmente implementadas:
 - [x] Endpoint protegido
 - [x] Validação dos DTOs
 - [x] Testes da camada web com MockMvc
+- [x] Padronização das respostas de erro
+- [x] Tratamento de recurso não encontrado (404)
 - [ ] Testes de integração
 - [ ] Refresh Token
 - [ ] Roles e permissões
