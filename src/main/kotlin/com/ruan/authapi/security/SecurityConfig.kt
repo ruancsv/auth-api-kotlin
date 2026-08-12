@@ -20,7 +20,8 @@ class SecurityConfig {
                     it
                             .requestMatchers(
                                     "/auth/register",
-                                    "/auth/login"
+                                    "/auth/login",
+                                    "/error"
                             ).permitAll()
                             .anyRequest().authenticated()
                 }

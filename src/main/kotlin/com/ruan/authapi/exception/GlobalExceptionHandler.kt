@@ -1,8 +1,8 @@
 package com.ruan.authapi.exception
 
-import com.ruan.authapi.exception.InvalidCredentialsException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
@@ -22,6 +22,7 @@ class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(body)
     }
+
     @ExceptionHandler(InvalidCredentialsException::class)
     fun handleInvalidCredentialsException(
             exception: InvalidCredentialsException
@@ -33,6 +34,27 @@ class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
+                .body(body)
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    fun handleValidationException(
+            exception: MethodArgumentNotValidException
+    ): ResponseEntity<Map<String, Any>> {
+
+        val errors = exception.bindingResult
+                .fieldErrors
+                .associate { error ->
+                    error.field to (error.defaultMessage ?: "Valor inválido")
+                }
+
+        val body = mapOf(
+                "status" to HttpStatus.BAD_REQUEST.value(),
+                "errors" to errors
+        )
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(body)
     }
 }

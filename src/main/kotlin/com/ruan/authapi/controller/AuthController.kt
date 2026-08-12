@@ -6,6 +6,7 @@ import com.ruan.authapi.dto.RegisterRequest
 import com.ruan.authapi.dto.UserResponse
 import com.ruan.authapi.service.JwtService
 import com.ruan.authapi.service.UserService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -22,7 +23,10 @@ class AuthController(
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    fun register(@RequestBody request: RegisterRequest): UserResponse {
+    fun register(
+            @Valid @RequestBody request: RegisterRequest
+    ): UserResponse {
+
         val user = userService.createUser(
                 email = request.email,
                 password = request.password
@@ -35,7 +39,10 @@ class AuthController(
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody request: LoginRequest): LoginResponse {
+    fun login(
+            @Valid @RequestBody request: LoginRequest
+    ): LoginResponse {
+
         val user = userService.authenticate(
                 email = request.email,
                 password = request.password
