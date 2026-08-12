@@ -115,7 +115,7 @@ Exemplo de requisição:
 ```json
 {
   "email": "user@example.com",
-  "password": "123456"
+  "password": "12345678"
 }
 ```
 
