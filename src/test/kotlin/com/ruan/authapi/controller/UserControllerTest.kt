@@ -29,6 +29,7 @@ class UserControllerTest {
                     status { isUnauthorized() }
                 }
     }
+
     @Test
     fun `deve retornar email ao acessar me com token valido`() {
 
@@ -43,6 +44,29 @@ class UserControllerTest {
                     status { isOk() }
                     jsonPath("$.email") {
                         value("teste@email.com")
+                    }
+                }
+    }
+
+    @Test
+    fun `deve retornar 404 ao acessar recurso inexistente`() {
+
+        mockMvc.get("/api/inexistente") {
+            with(
+                    jwt().jwt { token ->
+                        token.subject("teste@email.com")
+                    }
+            )
+        }
+                .andExpect {
+                    status { isNotFound() }
+
+                    jsonPath("$.status") {
+                        value(404)
+                    }
+
+                    jsonPath("$.message") {
+                        value("Recurso não encontrado")
                     }
                 }
     }
