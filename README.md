@@ -32,6 +32,8 @@ O projeto foi criado com foco em estudo e prática de autenticação segura em a
 - Validação de JWT
 - Proteção de endpoints
 - Autenticação stateless
+- Validação de dados de entrada com Jakarta Validation
+- Testes da camada web com MockMvc
 
 ---
 
@@ -87,7 +89,7 @@ Exemplo de requisição:
 ```json
 {
   "email": "user@example.com",
-  "password": "123456"
+  "password": "12345678"
 }
 ```
 
@@ -330,12 +332,11 @@ Funcionalidades atualmente implementadas:
 - [x] Geração de JWT
 - [x] Validação de JWT
 - [x] Endpoint protegido
-- [ ] Validação avançada dos DTOs
-- [ ] Testes unitários
+- [x] Validação dos DTOs
+- [x] Testes da camada web com MockMvc
 - [ ] Testes de integração
 - [ ] Refresh Token
 - [ ] Roles e permissões
-
 ---
 
 ## Objetivo
